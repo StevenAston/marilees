@@ -17,8 +17,8 @@ Vagrant.configure("2") do |config|
   # Example for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false # Display the VirtualBox GUI when booting the machine
-    vb.memory = "2048"
-    vb.cpus = "2"
+    vb.memory = "4096"
+    vb.cpus = "4"
     vb.customize ["modifyvm", :id, "--vram", "32"]
   config.vm.network :forwarded_port, guest: 80, host: 8069
   config.vm.network :private_network, ip: "192.168.68.8"
@@ -35,13 +35,8 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    sudo apt-get update
-    # sudo apt-get upgrade
-    # do-release-upgrade
-    sudo apt-get install -y build-essential curl software-properties-common nano virtualbox-guest-additions-iso
-    sudo apt-get install -y git-core
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-    nvm install stable
-    npm install -g hexo-cli
+    sudo apt-get install -y build-essential curl nano git-core virtualbox-guest-additions-iso
+    cd /home/vagrant/
+    git clone https://github.com/StevenAston/marilees.git
   SHELL
   end
