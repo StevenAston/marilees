@@ -35,6 +35,9 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    do-release-upgrade
     sudo apt-get install -y build-essential curl nano git-core git virtualbox-guest-additions-iso
     cd /home/vagrant/
     git clone https://github.com/StevenAston/marilees.git
